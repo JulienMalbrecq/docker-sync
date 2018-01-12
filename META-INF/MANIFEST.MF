@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: C:\Users\julmalbr\dev\syncher\src\main\java
+Main-Class: Syncher
+
