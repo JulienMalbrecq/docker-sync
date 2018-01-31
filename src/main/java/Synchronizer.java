@@ -43,8 +43,8 @@ public class Synchronizer {
 
         } else {
             // sync command
-            if (args.length == 1 && !args[0].equals("sync")) {
-                System.err.format("Error: Unknown argument %s%n", args[0]);
+            if (args.length == 2 && !args[1].equals("sync")) {
+                System.err.format("Error: Unknown argument %s%n", args[1]);
                 System.exit(1);
             }
 
@@ -61,7 +61,7 @@ public class Synchronizer {
         DockerSync synchronizer = new DockerSync(config);
 
 
-        if (args.length == 1 && args[0].equals("sync")) {
+        if (args.length == 2 && args[1].equals("sync")) {
             synchronizer.sync();
         } else {
             synchronizer.start();
