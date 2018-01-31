@@ -40,6 +40,10 @@ public class DockerSync {
     @SuppressWarnings("unchecked")
     public void start() {
         try {
+            // run once first
+            sync();
+
+            // start the loop
             WatchKey watchKey;
             while (true) {
                 System.out.println("Waiting for change ...");
@@ -73,6 +77,7 @@ public class DockerSync {
 
         if (config.getDelete()) {
             command.add("--delete");
+            command.add("--force");
         }
 
         String[] excludes = config.getExcludes();
@@ -104,9 +109,10 @@ public class DockerSync {
         }
     }
 
-    private void sync() {
+    public void sync() {
         for (List<String> command : commands) {
             try {
+                System.out.println(String.join(" ", command));
                 ProcessBuilder pb = new ProcessBuilder(command);
                 pb.inheritIO();
                 Process p = pb.start();

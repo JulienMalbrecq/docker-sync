@@ -42,18 +42,9 @@ public class Synchronizer {
             config.setDirectories(directories.toArray(new String[0]));
 
         } else {
-//            if (args.length < 2) {
-//                System.err.println("Error: Missing argument");
-//                System.exit(1);
-//            }
-//
-//            containerName = args[0];
-//            for (int i = 1; i <= args.length - 1; i++) {
-//                directories.add(args[i]);
-//            }
-
-            if (args.length < 1) {
-                System.err.println("Error: Missing argument");
+            // sync command
+            if (args.length == 1 && !args[0].equals("sync")) {
+                System.err.format("Error: Unknown argument %s%n", args[0]);
                 System.exit(1);
             }
 
@@ -68,7 +59,13 @@ public class Synchronizer {
         }
 
         DockerSync synchronizer = new DockerSync(config);
-        synchronizer.start();
+
+
+        if (args.length == 1 && args[0].equals("sync")) {
+            synchronizer.sync();
+        } else {
+            synchronizer.start();
+        }
     }
 
     private static SyncConfig getConfig(String path) throws IOException {
